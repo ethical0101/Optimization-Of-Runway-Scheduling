@@ -1,7 +1,7 @@
-# Final Project Report: AGNO-RS Runway Scheduling System
+﻿# Final Project Report: AERIS-OPT Runway Scheduling System
 
 ## Abstract
-This report describes the design, implementation, and evaluation of a runway scheduling system using an Adaptive Graph Neural Optimization (AGNO-RS) approach. The system ingests real flight data, constructs a separation matrix based on wake classes, generates schedules using multiple optimization methods, and provides a Streamlit-based analytics dashboard. We compare AGNO-RS against FCFS, GA, and MILP baselines using delay, throughput, and safety slack metrics. The system processes a full day dataset (224 events from 29,367 records) and produces end-to-end outputs, including visual timelines, runway free intervals, and best-method selection.
+This report describes the design, implementation, and evaluation of a runway scheduling system using an Adaptive Graph Neural Optimization (AERIS-OPT) approach. The system ingests real flight data, constructs a separation matrix based on wake classes, generates schedules using multiple optimization methods, and provides a Streamlit-based analytics dashboard. We compare AERIS-OPT against FCFS, GA, and MILP baselines using delay, throughput, and safety slack metrics. The system processes a full day dataset (224 events from 29,367 records) and produces end-to-end outputs, including visual timelines, runway free intervals, and best-method selection.
 
 ## Problem Statement
 Airports must schedule arrivals and departures on limited runways while ensuring safety separation, minimizing delays, and maintaining throughput. Traditional heuristics such as FCFS can be robust but may not capture dynamic interactions between flights. The challenge is to produce a schedule that improves multiple metrics simultaneously (total delay, average delay, throughput, and safety margin), while scaling to realistic datasets and providing operator-friendly visualization.
@@ -14,7 +14,7 @@ Airports must schedule arrivals and departures on limited runways while ensuring
 
 ## Objectives
 1. Build a full pipeline that ingests real flight data and produces a schedule.
-2. Implement AGNO-RS using graph-based features and neural scoring.
+2. Implement AERIS-OPT using graph-based features and neural scoring.
 3. Compare against FCFS, GA, and MILP baselines with consistent output schemas.
 4. Compute multi-factor metrics including delay, throughput, and safety slack.
 5. Deliver a dashboard that clearly visualizes schedules, runway utilization, and conflicts.
@@ -30,7 +30,7 @@ Airports must schedule arrivals and departures on limited runways while ensuring
 1. **Data ingestion**: Parse ADS-B flight states and detect airport proximity.
 2. **Feature encoding**: Build per-flight feature vectors and adjacency matrix.
 3. **Scheduling algorithms**:
-   - **AGNO-RS**: Graph neural scoring + differentiable sorting.
+   - **AERIS-OPT**: Graph neural scoring + differentiable sorting.
    - **FCFS**: First-come-first-served baseline with separation enforcement.
    - **GA**: Genetic algorithm with separation enforcement.
    - **MILP**: Placeholder baseline for consistent comparison.
@@ -40,7 +40,7 @@ Airports must schedule arrivals and departures on limited runways while ensuring
 6. **Dashboard**: Streamlit UI with timelines, heatmaps, and metrics.
 
 ## Methods
-### AGNO-RS (Proposed)
+### AERIS-OPT (Proposed)
 - **GraphEncoder** aggregates neighborhood features over a wake-class graph.
 - **AGNOModel** produces per-flight priority scores.
 - **Soft-rank** creates a differentiable ordering of flights.
@@ -65,13 +65,13 @@ Results from `outputs/baselines.json`:
 
 | Method   | Total Delay | Avg Delay | Makespan | Throughput | Avg Safety Slack | Min Safety Slack | Composite Score |
 |----------|-------------|-----------|----------|------------|------------------|-----------------|-----------------|
-| AGNO-RS  | 1,464,629.81 | 6,538.53  | 13,380.00 | 0.01674    | 4,440.00         | -0.00006        | 0.88884         |
+| AERIS-OPT  | 1,464,629.81 | 6,538.53  | 13,380.00 | 0.01674    | 4,440.00         | -0.00006        | 0.88884         |
 | FCFS     | 1,462,426.81 | 6,528.69  | 13,380.00 | 0.01674    | 4,440.00         | -0.00024        | 0.85717         |
 | MILP     | 1,462,426.81 | 6,528.69  | 13,380.00 | 0.01674    | 4,440.00         | -0.00024        | 0.85717         |
 | GA       | 1,483,754.00 | 6,623.90  | 13,456.17 | 0.01665    | 4,440.68         | -0.00006        | 0.69150         |
 | NIS-LNS  | 1,580,363.07 | 7,055.19  | 13,380.00 | 0.01674    | 4,440.00         | -0.00049        | 0.20000         |
 
-**Observation:** AGNO-RS achieved the best composite score by balancing delay, throughput, and safety slack. FCFS and MILP are close in total delay but score lower overall due to the composite weighting.
+**Observation:** AERIS-OPT achieved the best composite score by balancing delay, throughput, and safety slack. FCFS and MILP are close in total delay but score lower overall due to the composite weighting.
 
 ## UI and Analytics
 The Streamlit dashboard provides:
@@ -90,7 +90,7 @@ The Streamlit dashboard provides:
 - **Schema mismatches**: Baselines were aligned to the AGNO output schema.
 
 ## Conclusion
-We delivered an end-to-end runway scheduling system with a novel AGNO-RS model, robust baselines, consistent evaluation, and a rich analytics dashboard. The system handles a full dataset and selects the best method automatically using multi-factor scoring. AGNO-RS achieved the top composite score, demonstrating the value of neural scoring combined with separation-aware refinement.
+We delivered an end-to-end runway scheduling system with a novel AERIS-OPT model, robust baselines, consistent evaluation, and a rich analytics dashboard. The system handles a full dataset and selects the best method automatically using multi-factor scoring. AERIS-OPT achieved the top composite score, demonstrating the value of neural scoring combined with separation-aware refinement.
 
 ## Future Work
 - Train AGNO on larger datasets for improved generalization.
@@ -99,6 +99,8 @@ We delivered an end-to-end runway scheduling system with a novel AGNO-RS model, 
 - Integrate real-time streaming data for online scheduling.
 
 ## Artifacts
-- Code: `agno_runway/`
-- Outputs: `agno_runway/outputs/`
-- Dashboard: `agno_runway/ui/app.py`
+- Code: `aeris_opt/`
+- Outputs: `aeris_opt/outputs/`
+- Dashboard: `aeris_opt/ui/app.py`
+
+

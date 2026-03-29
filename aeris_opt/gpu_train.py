@@ -1,4 +1,4 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 import argparse
 from pathlib import Path
@@ -7,10 +7,10 @@ import pandas as pd
 import torch
 import torch.optim as optim
 
-from agno_runway.data.event_extractor import EventConfig, detect_events
-from agno_runway.data.loader import load_states
-from agno_runway.data.separation_builder import build_separation_matrix
-from agno_runway.optimizer.graph_model import AGNOModel, build_features
+from aeris_opt.data.event_extractor import EventConfig, detect_events
+from aeris_opt.data.loader import load_states
+from aeris_opt.data.separation_builder import build_separation_matrix
+from aeris_opt.optimizer.graph_model import AGNOModel, build_features
 
 
 def _wake_onehot(series: pd.Series) -> torch.Tensor:
@@ -86,3 +86,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+

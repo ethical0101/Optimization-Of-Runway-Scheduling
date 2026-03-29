@@ -1,11 +1,11 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 import random
 import pandas as pd
 import torch
 
-from agno_runway.data.separation_builder import build_separation_matrix
-from agno_runway.optimizer.robust_refiner import refine_schedule_with_runways
+from aeris_opt.data.separation_builder import build_separation_matrix
+from aeris_opt.optimizer.robust_refiner import refine_schedule_with_runways
 
 
 def ga_schedule(
@@ -47,3 +47,4 @@ def ga_schedule(
     flights["safety_margin"] = 0.0
     flights["assigned_runway"] = [f"RWY_{idx + 1:02d}" for idx in runways]
     return flights
+

@@ -1,4 +1,4 @@
-.venv/
+﻿.venv/
 __pycache__/
 *.pyc
 *.pyo
@@ -6,9 +6,16 @@ __pycache__/
 *.so
 *.dylib
 *.dll
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+*.log
+*.tmp
 
 # Data and generated outputs
-agno_runway/outputs/
+aeris_opt/outputs/*
+!aeris_opt/outputs/.gitkeep
 states_2022-06-27-23.csv
 
 # Streamlit and editor artifacts

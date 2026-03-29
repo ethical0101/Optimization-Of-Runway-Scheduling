@@ -7,7 +7,7 @@ Email: [placeholder]@example.com
 ---
 
 ## Abstract
-Efficient runway scheduling is critical for reducing delays while maintaining safe separation between aircraft. This paper presents an Adaptive Graph Neural Optimization for Runway Scheduling (AGNO-RS) system that encodes flight states as graph features, produces neural priority scores, and applies separation-aware refinement to generate feasible schedules. We evaluate AGNO-RS on a real flight dataset and compare it with FCFS, genetic algorithm (GA), and MILP baselines. Our system additionally provides a comprehensive analytics dashboard for operational visibility. Results show that AGNO-RS yields the best composite score across delay, throughput, and safety metrics, demonstrating the effectiveness of neural ranking combined with explicit separation enforcement.
+Efficient runway scheduling is critical for reducing delays while maintaining safe separation between aircraft. This paper presents an Adaptive Graph Neural Optimization for Runway Scheduling (AERIS-OPT) system that encodes flight states as graph features, produces neural priority scores, and applies separation-aware refinement to generate feasible schedules. We evaluate AERIS-OPT on a real flight dataset and compare it with FCFS, genetic algorithm (GA), and MILP baselines. Our system additionally provides a comprehensive analytics dashboard for operational visibility. Results show that AERIS-OPT yields the best composite score across delay, throughput, and safety metrics, demonstrating the effectiveness of neural ranking combined with explicit separation enforcement.
 
 ## Index Terms
 Runway scheduling, graph neural networks, multi-objective optimization, air traffic management, separation constraints, real-time analytics
@@ -27,8 +27,8 @@ Given a set of aircraft events with ETAs, wake classes, and operational constrai
 ### A. Data Preparation
 We use ADS-B state vectors (`states_2022-06-27-23.csv`) and select runway events near the inferred airport center. Features include ETA (seconds), velocity, altitude, and wake class (one-hot). A wake-class separation matrix encodes required separation times.
 
-### B. AGNO-RS Model
-The AGNO-RS model uses a GraphEncoder to aggregate neighborhood features from an adjacency matrix derived from the separation graph. A scoring head outputs priority scores used by a differentiable soft-rank mechanism to produce an ordering.
+### B. AERIS-OPT Model
+The AERIS-OPT model uses a GraphEncoder to aggregate neighborhood features from an adjacency matrix derived from the separation graph. A scoring head outputs priority scores used by a differentiable soft-rank mechanism to produce an ordering.
 
 ### C. Separation-Aware Refinement
 A refiner assigns runway availability and enforces minimum separation constraints, producing feasible schedules. This guarantees operational safety while enabling neural ranking to improve performance.
@@ -55,19 +55,19 @@ The system is implemented in Python with PyTorch (GPU-enabled) and Streamlit. Ou
 
 | Method   | Total Delay | Avg Delay | Makespan | Throughput | Avg Safety Slack | Min Safety Slack | Composite Score |
 |----------|-------------|-----------|----------|------------|------------------|-----------------|-----------------|
-| AGNO-RS  | 1,464,629.81 | 6,538.53  | 13,380.00 | 0.01674    | 4,440.00         | -0.00006        | 0.88884         |
+| AERIS-OPT  | 1,464,629.81 | 6,538.53  | 13,380.00 | 0.01674    | 4,440.00         | -0.00006        | 0.88884         |
 | FCFS     | 1,462,426.81 | 6,528.69  | 13,380.00 | 0.01674    | 4,440.00         | -0.00024        | 0.85717         |
 | MILP     | 1,462,426.81 | 6,528.69  | 13,380.00 | 0.01674    | 4,440.00         | -0.00024        | 0.85717         |
 | GA       | 1,483,754.00 | 6,623.90  | 13,456.17 | 0.01665    | 4,440.68         | -0.00006        | 0.69150         |
 | NIS-LNS  | 1,580,363.07 | 7,055.19  | 13,380.00 | 0.01674    | 4,440.00         | -0.00049        | 0.20000         |
 
-AGNO-RS achieved the best composite score, indicating improved multi-objective performance even when delay values are close to FCFS.
+AERIS-OPT achieved the best composite score, indicating improved multi-objective performance even when delay values are close to FCFS.
 
 ## VI. Discussion
-AGNO-RS demonstrates competitive performance and better composite ranking by balancing delay and safety. The strong performance of FCFS in total delay highlights the challenge of outperforming simple heuristics without extensive model training. The system’s real contribution is in providing a neural prioritization framework integrated with robust safety enforcement and transparent analytics.
+AERIS-OPT demonstrates competitive performance and better composite ranking by balancing delay and safety. The strong performance of FCFS in total delay highlights the challenge of outperforming simple heuristics without extensive model training. The systemâ€™s real contribution is in providing a neural prioritization framework integrated with robust safety enforcement and transparent analytics.
 
 ## VII. Conclusion
-We presented AGNO-RS, a graph neural scheduling framework that integrates neural scoring with separation-aware refinement and comprehensive visualization. Results on a real dataset show that AGNO-RS achieves the best composite performance and provides actionable insights through the dashboard.
+We presented AERIS-OPT, a graph neural scheduling framework that integrates neural scoring with separation-aware refinement and comprehensive visualization. Results on a real dataset show that AERIS-OPT achieves the best composite performance and provides actionable insights through the dashboard.
 
 ## VIII. Future Work
 1. Train the model on larger datasets for stronger generalization.
@@ -79,3 +79,4 @@ We presented AGNO-RS, a graph neural scheduling framework that integrates neural
 [1] Placeholder for ADS-B dataset documentation.
 [2] Placeholder for wake-class separation standards.
 [3] Placeholder for graph neural network scheduling references.
+
